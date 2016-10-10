@@ -7,4 +7,4 @@ var contentSchema = mongoose.Schema({
     hashtag:String
 })
 
-module.exports= mongoose.model('contents', contentSchema)
+module.exports= mongoose.model('content', contentSchema)

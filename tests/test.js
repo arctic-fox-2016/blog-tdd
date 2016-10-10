@@ -1,26 +1,58 @@
 ' use strict'
 
 var chai = require('chai'),
-    expect = chai.expect
+    expect = chai.expect,
+    chaiHttp = require('chai-http');
 var App = require('./index.js')
+let server = require('../app');
+var num
+let mongoose = require("mongoose");
+let Content = require('../models/content');
+
 chai.should()
-var num1,num2
+chai.use(chaiHttp);
+
+var id
+
+describe('====TEST CONTENT====', () => {
+  describe('/GET content', () => {
+      it('test GET dari isi content', (done) => {
+        chai.request(server)
+            .get('/content')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.length.should.be.eql(1);
+              done();
+            });
+      });
+  });
 
 
-describe("Test Blog Management System\n",()=> {
-  beforeEach(function(){
-    num = 1
-  })
-  it("======Testing insert content berhasil",()=>{
-    App.cekInsert(num).should.be.true
-  })
-  it("======Testing read content berhasil",()=>{
-    App.cekRead(num).should.be.true
-  })
-  it("======Testing update content berhasil",()=>{
-    App.cekUpdate(num).should.be.true
-  })
-  it("======Testing hapus content berhasil",()=>{
-    App.cekDelete(num).should.be.true
-  })
-})
+  describe('/POST book', () => {
+        it('test POST ke content', (done) => {
+          let content = {
+              judul: "Postingan 1",
+              isi: "ini isi dari blog nya",
+              hashtag: "hashtag"
+          }
+          chai.request(server)
+              .post('/content')
+              .send(content)
+              .end((err, res) => {
+                  res.should.have.status(200);
+                  res.body.should.be.a('object');
+                  res.body.should.have.property('judul').eql('Postingan 1');
+                  id = res.body.id
+                  console.log(id);
+                done();
+              });
+        });
+    });
+
+});
+
+
+
+
+///////////////////
