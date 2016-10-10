@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-var port = process.env.PORT || 8080
+var port = process.env.PORT || 8000
 var mongoose = require('mongoose')
 var cors = require('cors')
 var configDB = require('./config/database.js');
@@ -21,7 +21,7 @@ app.use(bodyParser())
 // }));
 //app.use(fileUpload())
 
-app.use('/api',require('./routes/api'))
+app.use('/api', require('./routes/api'))
 app.set('view engine', 'ejs')
 app.listen(port)
 console.log('server side is alive on Port : '+port);
