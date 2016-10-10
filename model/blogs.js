@@ -1,5 +1,5 @@
 var mg = require('mongoose'),
-    conn = mg.createConnection('mongodb://localhost/blog-tdd')
+    conn = mg.connect('mongodb://localhost/blog-tdd')
 
 
 var Schema = mg.Schema,
@@ -27,6 +27,8 @@ var Comment = new Schema({
   date: { type: Date, default: Date.now }
 });
 
-export const mg.model('author', Author)
-export const mg.model('blogppost', BlogPost)
-export const mg.model('comment', Comment)
+module.exports = {
+  author : mg.model('author', Author),
+  blogpost : mg.model('blogpost', BlogPost),
+  comment : mg.model('comment', Comment)
+}
