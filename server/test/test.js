@@ -22,7 +22,6 @@ describe("Get all Blogs", function() {
         var BlogMock = sinon.mock(Blogs);
         var expectedResult = {
             status: true,
-            todo: [],
             article: [],
             contributor: [],
             comments: []
@@ -45,6 +44,48 @@ describe("Get all Blogs", function() {
         };
         BlogMock.expects('find').yields(expectedResult, null);
         Blogs.find(function(err, result) {
+            BlogMock.verify();
+            BlogMock.restore();
+            expect(err.status).to.not.be.true;
+            done();
+        });
+    });
+});
+
+
+// Test will pass if the todo is saved
+describe("Post a new Blog", function() {
+    it("should create new Blog", function(done) {
+        var BlogMock = sinon.mock(new Blogs({
+            article: "Gila Pusing pala aneh bro",
+            contributor: "Orang keren Jakarta",
+            comments: "Pintar kali orang ini"
+        }));
+        var blogs = BlogMock.object;
+        var expectedResult = {
+            status: true
+        };
+        BlogMock.expects('save').yields(null, expectedResult);
+        blogs.save(function(err, result) {
+            BlogMock.verify();
+            BlogMock.restore();
+            expect(result.status).to.be.true;
+            done();
+        });
+    });
+    // Test will pass if the todo is not saved
+    it("should return error, if post not saved", function(done) {
+        var BlogMock = sinon.mock(new Blogs({
+            article: "Gila Pusing pala aneh bro",
+            contributor: "Orang keren Jakarta",
+            comments: "Pintar kali orang ini"
+        }));
+        var blogs = BlogMock.object;
+        var expectedResult = {
+            status: false
+        };
+        BlogMock.expects('save').yields(expectedResult, null);
+        blogs.save(function(err, result) {
             BlogMock.verify();
             BlogMock.restore();
             expect(err.status).to.not.be.true;
