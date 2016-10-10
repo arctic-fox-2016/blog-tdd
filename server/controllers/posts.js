@@ -30,10 +30,10 @@ function updateRecord(req, res, next){
   Posts.findOne({
     _id:req.params.id
   },(err, posts) => {
-    items.title = req.body.title
-    items.slug = req.body.slug
-    items.content = req.body.content
-    items.tag = req.body.tag
+    posts.title = req.body.title
+    posts.slug = req.body.slug
+    posts.content = req.body.content
+    posts.tag = req.body.tag
 
     posts.save((err)=> {
       if(err) throw err
@@ -47,7 +47,7 @@ function deleteRecord(req, res, next){
     _id:req.params.id
   },(err, posts) => {
     if(err)throw err
-    items.remove((err)=> {
+    posts.remove((err)=> {
       if(err) throw err
       res.json(posts)
     })
