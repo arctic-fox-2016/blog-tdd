@@ -6,5 +6,5 @@ var chai = require('chai'),
 
 var App = require('../index.js')
 
-describe("Test", () => {
+describe("Test Controller", () => {
 })
