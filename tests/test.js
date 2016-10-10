@@ -43,12 +43,44 @@ describe('====TEST CONTENT====', () => {
                   res.should.have.status(200);
                   res.body.should.be.a('object');
                   res.body.should.have.property('judul').eql('Postingan 1');
-                  id = res.body.id
-                  console.log(id);
                 done();
               });
         });
     });
+
+
+    describe('/PUT/:id content', () => {
+      it('it should UPDATE a content given the id', (done) => {
+        let content = new Content({judul: "Postingan 1", isi: "ini isi dari blog nya", hashtag:"hashtag"})
+        content.save((err, book) => {
+                chai.request(server)
+                .put('/content/' + content.id)
+                .send({judul: "The Chronicles of Narnia", isi: "C.S. Lewis", hashtag:"HASH"})
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('judul').eql('The Chronicles of Narnia');
+                  done();
+                });
+          });
+      });
+  });
+
+
+  describe('/DELETE/:id book', () => {
+      it('it should DELETE a book given the id', (done) => {
+        let content = new Content({judul: "The Chronicles of Narnia", isi: "C.S. Lewis", hashtag:"YOWIS"})
+        content.save((err, book) => {
+                chai.request(server)
+                .delete('/content/' + content.id)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                  done();
+                });
+          });
+      });
+  });
 
 });
 

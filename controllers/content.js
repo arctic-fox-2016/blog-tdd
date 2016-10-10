@@ -27,9 +27,9 @@ function update(req,res,next){
   Contents.findOne({
     _id:req.params.id
   },(err,items) => {
-      judul.bankName = req.body.judul
-      isi.type = req.body.isi
-      hashtag.cardClass = req.body.hashtag
+      items.judul = req.body.judul
+      items.isi = req.body.isi
+      items.hashtag = req.body.hashtag
 
       items.save((err)=> {
         if(err) throw err
