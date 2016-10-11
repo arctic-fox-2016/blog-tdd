@@ -17,12 +17,15 @@ function createRecord(req, res, next){
   })
 
   posts.save()
-  res.json(posts)
+  res.status(200).json(posts)
 }
 
 function readRecord(req, res, next){
-  Posts.find({},(err,result) => {
-    res.json(result)
+  Posts.find({},(err, result) => {
+    if(result.length >= 1)
+      res.status(200).json(result)
+    else
+      res.status(204).json({error:"Cannot read any record"})
   })
 }
 
@@ -39,10 +42,10 @@ function updateRecord(req, res, next){
 
       posts.save((err)=> {
         if(err) throw err
-        res.json(posts)
+        res.status(200).json(posts)
       })
     } else {
-      res.json({error: "Cannot find your record"})
+      res.status(204).json({error: "Cannot find your record"})
     }
   })
 }
@@ -55,10 +58,10 @@ function deleteRecord(req, res, next){
     if(posts){
       posts.remove((err)=> {
         if(err) throw err
-        res.json(posts)
+        res.status(200).json(posts)
       })
     } else {
-      res.json({error: "Cannot find your record"})
+      res.status(204).json({error: "Cannot find your record"})
     }
   })
 }
