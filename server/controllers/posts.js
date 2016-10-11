@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function createRecord(req, res, next){
-  var posts = new Posts({
+  var record = new Posts({
     title:req.body.title,
     slug:req.body.slug,
     content:req.body.content,
@@ -16,14 +16,14 @@ function createRecord(req, res, next){
     createdAt:new Date()
   })
 
-  posts.save()
-  res.status(200).json(posts)
+  record.save()
+  res.status(200).json(record)
 }
 
 function readRecord(req, res, next){
-  Posts.find({},(err, result) => {
-    if(result.length >= 1)
-      res.status(200).json(result)
+  Posts.find({},(err, record) => {
+    if(record.length >= 1)
+      res.status(200).json(record)
     else
       res.status(204).json({error:"Cannot read any record"})
   })
@@ -32,17 +32,17 @@ function readRecord(req, res, next){
 function updateRecord(req, res, next){
   Posts.findOne({
     _id:req.params.id
-  },(err, posts) => {
+  },(err, record) => {
     if(err) throw err
-    if(posts){
-      posts.title = req.body.title
-      posts.slug = req.body.slug
-      posts.content = req.body.content
-      posts.tag = req.body.tag
+    if(record){
+      record.title = req.body.title
+      record.slug = req.body.slug
+      record.content = req.body.content
+      record.tag = req.body.tag
 
-      posts.save((err)=> {
+      record.save((err)=> {
         if(err) throw err
-        res.status(200).json(posts)
+        res.status(200).json(record)
       })
     } else {
       res.status(204).json({error: "Cannot find your record"})
@@ -53,12 +53,12 @@ function updateRecord(req, res, next){
 function deleteRecord(req, res, next){
   Posts.findOne({
     _id:req.params.id
-  },(err, posts) => {
+  },(err, record) => {
     if(err) throw err
-    if(posts){
-      posts.remove((err)=> {
+    if(record){
+      record.remove((err)=> {
         if(err) throw err
-        res.status(200).json(posts)
+        res.status(200).json(record)
       })
     } else {
       res.status(204).json({error: "Cannot find your record"})
