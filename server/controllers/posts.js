@@ -42,7 +42,7 @@ function updateRecord(req, res, next){
         res.json(posts)
       })
     } else {
-      res.json({error: "Cannot find yout file"})
+      res.json({error: "Cannot find your record"})
     }
   })
 }
@@ -58,7 +58,7 @@ function deleteRecord(req, res, next){
         res.json(posts)
       })
     } else {
-      res.json({error: "Cannot find yout file"})
+      res.json({error: "Cannot find your record"})
     }
   })
 }
