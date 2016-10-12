@@ -14,13 +14,20 @@ var Author = new Schema({
     });
 
 var BlogPost = new Schema({
-    author    : ObjectId,
+    author    : {
+      type: ObjectId,
+      ref: 'author'
+    },
     title     : String,
     body      : String,
     date      : Date
 });
 
 var Comment = new Schema({
+  blogpost_id    : {
+    type: ObjectId,
+    ref: 'blogpost'
+  },
   name: { type: String, default: 'anonym' },
   age: { type: Number, min: 18, index: true },
   bio: { type: String, match: /[a-z]/ },

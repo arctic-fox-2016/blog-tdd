@@ -1,6 +1,6 @@
-var  author =  require('./model/blogs')
+var  author =  require('../model/blogs')
 
-function insert_author(req,res,callback) {
+function insert_author(req,res) {
   new author.author({
           first_name  : req.body.first_name,
           last_name   : req.body.last_name,
@@ -9,7 +9,12 @@ function insert_author(req,res,callback) {
           address     : req.body.address
       })
       .save(function (err) {
-        if(err) console.log(err);
+        if(err) {
+          console.log(err);
+        } else {
+          console.log(req.body.first_name)
+                  res.json({success:'ok', message: `${req.body.first_name} been saved`})
+        }
       })
 }
 // var authortest = new author.author({
@@ -23,7 +28,7 @@ function insert_author(req,res,callback) {
 //       console.log('1 object saved');
 //     })
 
-function update_author(req,res,callback) {
+function update_author(req,res) {
   author.author.update({_id:req.params.author_id},{
           first_name  : req.body.first_name,
           last_name   : req.body.last_name,
@@ -31,31 +36,39 @@ function update_author(req,res,callback) {
           email       : req.body.email,
           address     : req.body.address
       }, function (err) {
-        if(err) console.log(err)
+        if(err) {
+          console.log(err)
+        } else{
+                  res.json({success:'ok', message: `${req.params.author_id} been updated`})
+        }
       })
 }
-function delete_author(req,res,callback) {
+function delete_author(req,res) {
   author.author.update({_id:req.params.author_id}, function (err) {
-        if(err) console.log(err)
+    if(err) {
+      console.log(err)
+    } else {
+      res.json({success:'ok', message: `${req.params.author_id} been deleted`})
+    }
       })
 }
 
-function find_author(req,res,callback) {
+function find_author(req,res) {
   author.author.find({_id:req.params.author_id},function (err,result) {
       if(err){
         console.log(err)
       } else {
-        return result
+        res.json(result)
       }
   })
 }
 
-function find_all_author(req,res,callback) {
+function find_all_author(req,res) {
   author.author.find({},function (err,result) {
       if(err){
         console.log(err)
       } else {
-        return result
+        res.json(result)
       }
   })
 }
