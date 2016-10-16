@@ -1,13 +1,13 @@
 //create new express router
 var express = require('express')
 var router = express.Router()
-var blogsController = require('../controllers/blogs')
+var itemsController = require('../controllers/items')
 
 //export router
 
-router.post('/blogs', blogsController.insert)
-router.get('/blogs', blogsController.display)
-router.put('/blogs/:id', blogsController.update)
-router.delete('/blogs/:id', blogsController.deleteitem)
+router.post('/items', itemsController.insert)
+router.get('/items', itemsController.displays)
+router.put('/items/:id', itemsController.update)
+router.delete('/items/:id', itemsController.deleteitem)
 
 module.exports = router

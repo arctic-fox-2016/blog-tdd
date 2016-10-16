@@ -12,20 +12,8 @@ Membuat blog engine dengan menggunakan, Authentication menggunakan session, logi
 |blogs|..
 
 
-## EndPoint  Users
-
-| End Point | HTTP| Description|
-|-------|------------|---------|
-| /api/users | GET | Load view
-|/api/users/|POST|..
-|/api/users/:id|GET|..
-|/api/users/:id|PUT|..
-|/api/users/:id|DEL|..
-
-
 
 ## EndPoint  Blogs
-
 
 | End Point | HTTP| Description|
 |-------|------------|---------|
@@ -34,3 +22,15 @@ Membuat blog engine dengan menggunakan, Authentication menggunakan session, logi
 |/api/blogs/:id|GET|..
 |/api/blogs/:id|PUT|..
 |/api/blogs/:id|DEL|..
+
+## How to install
+
+```
+npm install
+```
+
+## How to use TDD
+
+```
+npm test
+```

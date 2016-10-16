@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 var app = express()
 var port = process.env.PORT || 8080;
 
-mongoose.connect('mongodb://localhost/ivangerardblog')
+mongoose.connect('mongodb://localhost/ivangerardcart')
+app.use(cors())
 app.use(morgan('dev')); // parse application/json
 app.use(bodyParser.json({
     type: 'application/vnd.api+json'

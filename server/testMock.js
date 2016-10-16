@@ -12,10 +12,7 @@ require('sinon-mongoose');
 
 //Importing our todo model for our unit testing.
 var Blogs = require('../models/blogs')
-
-
 chai.should()
-
 describe("Get all Blogs", function() {
     // Test will pass if we get all todos
     it("should return all the Blogs", function(done) {
@@ -51,7 +48,6 @@ describe("Get all Blogs", function() {
         });
     });
 });
-
 
 // Test will pass if the todo is saved
 describe("Post a new Blog", function() {
