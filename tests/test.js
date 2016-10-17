@@ -29,7 +29,7 @@ describe('====TEST CONTENT====', () => {
   });
 
 
-  describe('/POST book', () => {
+  describe('/POST content', () => {
         it('test POST ke content', (done) => {
           let content = {
               judul: "Postingan 1",
@@ -52,14 +52,14 @@ describe('====TEST CONTENT====', () => {
     describe('/PUT/:id content', () => {
       it('it should UPDATE a content given the id', (done) => {
         let content = new Content({judul: "Postingan 1", isi: "ini isi dari blog nya", hashtag:"hashtag"})
-        content.save((err, book) => {
+        content.save((err, content) => {
                 chai.request(server)
                 .put('/content/' + content.id)
                 .send({judul: "The Chronicles of Narnia", isi: "C.S. Lewis", hashtag:"HASH"})
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('judul').eql('The Chronicles of Narnia');
+                    res.content.should.be.a('object');
+                    res.content.should.have.property('judul').eql('The Chronicles of Narnia');
                   done();
                 });
           });
@@ -67,10 +67,10 @@ describe('====TEST CONTENT====', () => {
   });
 
 
-  describe('/DELETE/:id book', () => {
-      it('it should DELETE a book given the id', (done) => {
+  describe('/DELETE/:id content', () => {
+      it('it should DELETE a content given the id', (done) => {
         let content = new Content({judul: "The Chronicles of Narnia", isi: "C.S. Lewis", hashtag:"YOWIS"})
-        content.save((err, book) => {
+        content.save((err, content) => {
                 chai.request(server)
                 .delete('/content/' + content.id)
                 .end((err, res) => {
