@@ -37,19 +37,17 @@ var BlogPost = new Schema({
     }]
 });
 var Question = new Schema({
-    user    : {
-      type: ObjectId,
-      ref: 'user'
-    },
+    user      : {type: ObjectId,ref: 'user'},
     title     : String,
     body      : String,
     date      : Date,
-    comments: [{
-        text: String,
-        user: {
-            type: ObjectId,
-            ref: 'user'
-        }
+    upvotes   :[{user: {type: ObjectId,ref: 'user'},email:String}],
+    downvotes :[{user: {type: ObjectId,ref: 'user'},email:String}],
+    comments  : [{
+                  text      : String,
+                  upvotes   :[{user: {type: ObjectId,ref: 'user'},email:String}],
+                  downvotes :[{user: {type: ObjectId,ref: 'user'},email:String }],
+                  user      : {type: ObjectId,ref: 'user'}
     }]
 });
 

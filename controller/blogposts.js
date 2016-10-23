@@ -2,7 +2,6 @@ var  blogpost =  require('../model/blogs')
 
 function insert_blogpost(req,res) {
   new blogpost.blogpost({
-            blogpost_id : req.body.blogpost_id,
             author    : req.body.author,
             title     : req.body.title,
             body      : req.body.body,
@@ -12,7 +11,7 @@ function insert_blogpost(req,res) {
         if(err) {
           console.log(err);
         } else {
-                  res.json({success:'ok', message: `${req.params.title} been saved`})
+                  res.json({success:'ok', message: `${req.body.title} been saved`})
         }
       })
 }
@@ -20,7 +19,7 @@ function insert_blogpost(req,res) {
 
 function update_blogpost(req,res) {
   blogpost.blogpost.update({_id:req.params.blogpost_id},{
-          blogpost_id : req.body.blogpost_id, 
+          blogpost_id : req.body.blogpost_id,
           author    : req.body.author,
           title     : req.body.title,
           body      : req.body.body,
